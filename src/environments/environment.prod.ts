@@ -1,3 +1,7 @@
+let protocol = window.location.protocol;
+let hostname = window.location.hostname;
+
 export const environment = {
-  production: true
+  production: true,
+  host: protocol + '//' + hostname
 };

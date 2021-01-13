@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {io} from 'socket.io-client';
+import {environment} from '../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  private socket=io('https://chat-app-130121.herokuapp.com/');
+  
+  private socket=io(environment.host);
 
   constructor() { }
 
