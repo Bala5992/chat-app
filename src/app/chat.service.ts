@@ -7,7 +7,7 @@ import {io} from 'socket.io-client';
 })
 export class ChatService {
 
-  private socket=io('http://localhost:4000');
+  private socket=io('https://chat-app-130121.herokuapp.com/');
 
   constructor() { }
 
