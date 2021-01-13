@@ -1,0 +1,19 @@
+.msg-panel {
+    border: 1px solid blanchedalmond;
+    border-radius: 5px;
+    background: #e6e4e4;
+    min-height: 150px;
+    max-height: 150px;
+    overflow: auto;
+}
+.mat-err {
+    color: #f44336;
+}
+.txt-bold {
+    font-weight: bolder;
+}
+.status-ul li::marker {
+    color: green;
+    font-weight: bold;
+    font-size: 22px;
+}

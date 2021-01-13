@@ -1,0 +1,107 @@
+<form autocomplete="off" style="padding: 175px;">
+  <mat-card>
+    <mat-card-header>
+      <div class="row">
+        <div class="col-md-4">
+          <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input type="text" matInput [formControl]="username" placeholder="Username" [readonly]="hasJoined">
+            <mat-error *ngIf="username.hasError('required')">
+              Username is <strong>required</strong>
+            </mat-error>
+            <mat-hint *ngIf="!hasJoined && !isUserAvailable" [ngClass]="{'mat-err':!hasJoined && !isUserAvailable}">
+              Username not <strong [ngClass]="{'txt-bold':!hasJoined && !isUserAvailable}">available</strong>              
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4">
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a room</mat-label>
+            <mat-select [(value)]="room" [disabled]="hasJoined">
+              <mat-option value="Standard">Standard</mat-option>
+              <mat-option value="Ultra">Ultra</mat-option>
+              <mat-option value="Deluxe">Deluxe</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-4 pull-right pad-15">
+          <button mat-raised-button color="primary" [disabled]="hasJoined || username.hasError('required')" (click)="join()">Join</button>
+          <button mat-raised-button color="accent" class="ml-5" [disabled]="!hasJoined" (click)="leave()">Leave</button>
+        </div>        
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-accordion>
+        <mat-expansion-panel hideToggle [expanded]="hasJoined" [disabled]="true">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Chat window
+            </mat-panel-title>
+            <mat-panel-description>
+              {{ hasJoined ? 'Room created' : 'Start a chat room' }}
+              <div class="col-md-4" style="max-height: 50px;overflow: auto;">
+                <ul class="status-ul">
+                  <li *ngFor="let item of users">{{item}}</li>
+                </ul>
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <div class="row msg-panel">
+              <ul style="list-style: none;">
+                <li *ngFor="let item of messageArray">
+                  <span [ngClass]="{'pull-right':item.user!=username}">
+                    <strong>{{item.user}}</strong>{{item.message}}
+                  </span>
+                </li>
+              </ul>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="row">
+        <div class="col-md-8">
+          <input type="text" class="form-control" [disabled]="!hasJoined" placeholder="Enter your message" [formControl]="message">
+        </div>
+        <div class="col-md-4">
+          <button mat-raised-button class="btn btn-primary" [disabled]="!hasJoined || !message.value" (click)="send()">Send</button>
+        </div>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</form>
+<!-- <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md-4">
+          <input type="text" class="form-control" [readonly]="hasJoined" placeholder="Enter your name" required [(ngModel)]="username">
+        </div>
+        <div class="col-md-4">
+          <select class="form-control" [(ngModel)]="room">
+            <option value="Standard">Standard</option>
+            <option value="Ultra">Ultra</option>
+            <option value="Deluxe">Deluxe</option>
+          </select>
+        </div>
+        <div class="col-md-4 pull-right">
+          <button class="btn btn-success" [disabled]="hasJoined" (click)="join()">Join</button>
+          <button class="btn btn-danger" [disabled]="!hasJoined" (click)="leave()">Leave</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="msg-panel">
+        <ul>
+          <li *ngFor="let item of messageArray"><strong>{{item.user}}</strong>{{item.message}}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <input type="text" class="form-control" [disabled]="!hasJoined" placeholder="Enter your message" required [(ngModel)]="message">
+      </div>
+      <div class="col-md-4 pull-right">
+        <button class="btn btn-primary" [disabled]="!hasJoined" (click)="send()">Send</button>
+      </div>
+    </div>
+</div> -->
