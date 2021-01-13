@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "nodemon ./server/server",
+    "start": "node ./server/server",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

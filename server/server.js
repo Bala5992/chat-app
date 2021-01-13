@@ -4,7 +4,7 @@ var path = require('path');
 var socketio=require('socket.io');
 
 let app=express();
-const port=4000;
+var port = normalizePort(process.env.PORT || '4000');
 
 app.set('port',port);
 
